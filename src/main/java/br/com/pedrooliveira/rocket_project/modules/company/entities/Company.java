@@ -22,6 +22,8 @@ public class Company {
     @Column(nullable = false, length = 254)
     private String name;
 
+    private Boolean nationalCompany;
+
     @Column(length = 20, unique = true)
     private String cnpj;
 
