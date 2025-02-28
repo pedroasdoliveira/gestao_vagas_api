@@ -40,6 +40,6 @@ public class Job {
     @JoinColumn(name = "company_id", insertable = false, updatable = false)
     private Company company;
 
-    @Column(name = "company_id")
+    @Column(name = "company_id", nullable = false)
     private UUID companyId;
 }

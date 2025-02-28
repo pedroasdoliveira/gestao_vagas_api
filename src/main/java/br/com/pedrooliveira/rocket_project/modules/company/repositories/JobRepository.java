@@ -1,4 +1,9 @@
 package br.com.pedrooliveira.rocket_project.modules.company.repositories;
 
-public interface JobRepository {
+import br.com.pedrooliveira.rocket_project.modules.company.entities.Job;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+public interface JobRepository extends JpaRepository<Job, UUID> {
 }
