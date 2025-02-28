@@ -1,6 +1,7 @@
 package br.com.pedrooliveira.rocket_project.modules.company.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,9 +20,10 @@ public class Job {
     @Column(nullable = false, length = 254)
     private String name;
 
-    @Column(nullable = false, length = 254)
+    @Column(nullable = false)
     private String description;
 
+    @NotBlank(message = "O campo de Hierarquia(lavel) da vaga deve ser informado!")
     @Column(nullable = false, length = 254)
     private String level;
 

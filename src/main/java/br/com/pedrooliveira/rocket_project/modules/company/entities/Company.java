@@ -42,7 +42,6 @@ public class Company {
     @Column(nullable = false, length = 254)
     private String website;
 
-    @Column(length = 254)
     private String description;
 
     @CreationTimestamp
