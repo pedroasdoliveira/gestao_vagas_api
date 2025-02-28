@@ -13,9 +13,6 @@ public class CreateCompanyUseCase {
     private CompanyRepository companyRepository;
 
     public Company execute(Company company) {
-        System.out.println("Company: ");
-        System.out.println(company);
-
         this.companyRepository
                 .findByUsernameOrEmail(company.getUsername(), company.getEmail())
                 .ifPresent((user) -> {

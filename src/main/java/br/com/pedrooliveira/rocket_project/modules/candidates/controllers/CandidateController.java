@@ -25,8 +25,10 @@ public class CandidateController {
             Candidate result = this.createCandidateUseCase.execute(candidate);
 
             return ResponseEntity.ok().body(result);
+        } catch (UserFoundException ex) {
+            return ResponseEntity.status(400).body(ex.getMessage());
         } catch (Exception ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
 }
