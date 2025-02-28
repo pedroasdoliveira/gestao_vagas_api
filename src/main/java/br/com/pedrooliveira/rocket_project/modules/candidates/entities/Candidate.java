@@ -24,7 +24,7 @@ public class Candidate {
     private String name;
 
     @Pattern(regexp = "\\S+", message = "O username não deve conter espaço")
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, unique = true)
     private String username;
 
     @Email(message = "O e-mail deve ser válido")
