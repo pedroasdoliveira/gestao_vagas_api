@@ -4,6 +4,7 @@ import br.com.pedrooliveira.rocket_project.exceptions.candidate.UserFoundExcepti
 import br.com.pedrooliveira.rocket_project.modules.company.entities.Company;
 import br.com.pedrooliveira.rocket_project.modules.company.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +12,9 @@ public class CreateCompanyUseCase {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Company execute(Company company) {
         this.companyRepository
@@ -30,6 +34,9 @@ public class CreateCompanyUseCase {
                         throw new UserFoundException("O CNPJ informado já existe!");
                     });
         }
+
+        final String password = passwordEncoder.encode(company.getPassword());
+        company.setPassword(password);
 
         return this.companyRepository.save(company);
     }
