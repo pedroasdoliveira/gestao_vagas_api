@@ -39,7 +39,7 @@ public class AuthCompanyUseCase {
         var passwordMatches = this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
 
         if (!passwordMatches) {
-            throw new AuthenticationException();
+            throw new UsernameNotFoundException("Company username/password incorrect!");
         }
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
