@@ -1,6 +1,6 @@
 package br.com.pedrooliveira.rocket_project.security;
 
-import br.com.pedrooliveira.rocket_project.providers.JWTProvider;
+import br.com.pedrooliveira.rocket_project.providers.JWTCandidateProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,10 +16,10 @@ import java.io.IOException;
 import java.util.Collections;
 
 @Component
-public class SecurityFilter extends OncePerRequestFilter {
+public class SecurityCandidateFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JWTProvider jwtProvider;
+    private JWTCandidateProvider jwtCandidateProvider;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -27,27 +27,28 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         String header = request.getHeader("Authorization");
 
-        // System.out.println("Token: ");
-        // System.out.println(header);
-
-        if (request.getRequestURI().startsWith("/company")) {
+        if (request.getRequestURI().startsWith("/candidate")) {
             if (header != null) {
-                var token = this.jwtProvider.validationToken(header);
+                var token = this.jwtCandidateProvider.validateToken(header);
 
                 if (token == null) {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     return;
                 }
 
+                request.setAttribute("candidate_id", token.getSubject());
                 var roles = token.getClaim("roles").asList(Object.class);
+
                 var grants = roles.stream()
-                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toString().toUpperCase()))
-                        .toList();
+                        .map(
+                            role -> new SimpleGrantedAuthority("ROLE_" + role.toString().toUpperCase())
+                        ).toList();
 
-                request.setAttribute("company_id", token.getSubject());
-                UsernamePasswordAuthenticationToken auth =
-                        new UsernamePasswordAuthenticationToken(token.getSubject(),null, grants);
-
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                        token.getSubject(),
+                        null,
+                        grants
+                );
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }

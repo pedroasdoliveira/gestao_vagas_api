@@ -1,6 +1,7 @@
 package br.com.pedrooliveira.rocket_project.modules.company.controllers;
 
 import br.com.pedrooliveira.rocket_project.modules.company.dto.AuthCompanyDTO;
+import br.com.pedrooliveira.rocket_project.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.pedrooliveira.rocket_project.modules.company.useCases.AuthCompanyUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class AuthCompanyController {
     @PostMapping("/company")
     public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) {
         try {
-            String result = this.authCompanyUseCase.execute(authCompanyDTO);
+            AuthCompanyResponseDTO result = this.authCompanyUseCase.execute(authCompanyDTO);
 
             return ResponseEntity.ok().body(result);
         } catch (UsernameNotFoundException ex) {
