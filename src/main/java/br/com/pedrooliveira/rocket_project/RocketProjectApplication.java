@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(
+/*@OpenAPIDefinition(
 		info = @Info(
 				title = "Gestão de vagas",
 				description = "API responsável pela gestão de vagas",
@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		bearerFormat = "JWT",
 		type = SecuritySchemeType.HTTP,
 		in = SecuritySchemeIn.HEADER
-)
+)*/
 public class RocketProjectApplication {
 
 	public static void main(String[] args) {
