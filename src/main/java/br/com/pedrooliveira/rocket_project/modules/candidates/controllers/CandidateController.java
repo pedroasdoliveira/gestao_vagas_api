@@ -5,7 +5,17 @@ import br.com.pedrooliveira.rocket_project.modules.candidates.dto.ProfileCandida
 import br.com.pedrooliveira.rocket_project.modules.candidates.entities.Candidate;
 import br.com.pedrooliveira.rocket_project.modules.candidates.repositories.CandidateRepository;
 import br.com.pedrooliveira.rocket_project.modules.candidates.useCases.CreateCandidateUseCase;
+import br.com.pedrooliveira.rocket_project.modules.candidates.useCases.ListAllJobsByFilterUseCase;
 import br.com.pedrooliveira.rocket_project.modules.candidates.useCases.ProfileCandidateUseCase;
+import br.com.pedrooliveira.rocket_project.modules.company.entities.Job;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +24,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -25,6 +36,9 @@ public class CandidateController {
 
     @Autowired
     private ProfileCandidateUseCase profileCandidateUseCase;
+
+    @Autowired
+    private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
 
     @PostMapping("/add")
     public ResponseEntity<Object> create(@Valid @RequestBody Candidate candidate) {
@@ -53,5 +67,24 @@ public class CandidateController {
         } catch (Exception ex) {
             return ResponseEntity.internalServerError().body(ex.getMessage());
         }
+    }
+
+    @GetMapping("/job")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    @Tag(name = "Candidato", description = "Informações do candidato")
+    @Operation(
+            summary = "Listagem de vagas disponíveis para o candidato",
+            description = "Lista de vagas"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {
+                    @Content(
+                            array = @ArraySchema(schema = @Schema(implementation = Job.class))
+                    )
+            })
+    })
+    @SecurityRequirement(name = "jwt_auth")
+    public List<Job> findJobByFilter(@RequestParam String filter) {
+        return this.listAllJobsByFilterUseCase.execute(filter);
     }
 }
