@@ -1,8 +1,8 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.controllers;
+package br.com.pedrooliveira.rocket_project.modules.candidate.controllers;
 
-import br.com.pedrooliveira.rocket_project.modules.candidates.dto.AuthCandidateRequestDTO;
-import br.com.pedrooliveira.rocket_project.modules.candidates.dto.AuthCandidateResponseDTO;
-import br.com.pedrooliveira.rocket_project.modules.candidates.useCases.AuthCandidateUseCase;
+import br.com.pedrooliveira.rocket_project.modules.candidate.dto.AuthCandidateRequestDTO;
+import br.com.pedrooliveira.rocket_project.modules.candidate.dto.AuthCandidateResponseDTO;
+import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.AuthCandidateUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,12 +1,11 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.controllers;
+package br.com.pedrooliveira.rocket_project.modules.candidate.controllers;
 
 import br.com.pedrooliveira.rocket_project.exceptions.candidate.UserFoundException;
-import br.com.pedrooliveira.rocket_project.modules.candidates.dto.ProfileCandidateResponseDTO;
-import br.com.pedrooliveira.rocket_project.modules.candidates.entities.Candidate;
-import br.com.pedrooliveira.rocket_project.modules.candidates.repositories.CandidateRepository;
-import br.com.pedrooliveira.rocket_project.modules.candidates.useCases.CreateCandidateUseCase;
-import br.com.pedrooliveira.rocket_project.modules.candidates.useCases.ListAllJobsByFilterUseCase;
-import br.com.pedrooliveira.rocket_project.modules.candidates.useCases.ProfileCandidateUseCase;
+import br.com.pedrooliveira.rocket_project.modules.candidate.dto.ProfileCandidateResponseDTO;
+import br.com.pedrooliveira.rocket_project.modules.candidate.entities.Candidate;
+import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.CreateCandidateUseCase;
+import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.ListAllJobsByFilterUseCase;
+import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.ProfileCandidateUseCase;
 import br.com.pedrooliveira.rocket_project.modules.company.entities.Job;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

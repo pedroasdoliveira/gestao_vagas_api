@@ -1,4 +1,4 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.useCases;
+package br.com.pedrooliveira.rocket_project.modules.candidate.useCases;
 
 import br.com.pedrooliveira.rocket_project.modules.company.entities.Job;
 import br.com.pedrooliveira.rocket_project.modules.company.repositories.JobRepository;

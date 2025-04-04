@@ -1,4 +1,4 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.dto;
+package br.com.pedrooliveira.rocket_project.modules.candidate.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.useCases;
+package br.com.pedrooliveira.rocket_project.modules.candidate.useCases;
 
 import br.com.pedrooliveira.rocket_project.exceptions.candidate.UserFoundException;
-import br.com.pedrooliveira.rocket_project.modules.candidates.entities.Candidate;
-import br.com.pedrooliveira.rocket_project.modules.candidates.repositories.CandidateRepository;
+import br.com.pedrooliveira.rocket_project.modules.candidate.entities.Candidate;
+import br.com.pedrooliveira.rocket_project.modules.candidate.repositories.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

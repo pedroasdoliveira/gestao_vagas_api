@@ -1,4 +1,4 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.dto;
+package br.com.pedrooliveira.rocket_project.modules.candidate.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

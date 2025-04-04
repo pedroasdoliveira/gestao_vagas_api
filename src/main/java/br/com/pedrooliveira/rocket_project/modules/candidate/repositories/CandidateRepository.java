@@ -1,6 +1,6 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.repositories;
+package br.com.pedrooliveira.rocket_project.modules.candidate.repositories;
 
-import br.com.pedrooliveira.rocket_project.modules.candidates.entities.Candidate;
+import br.com.pedrooliveira.rocket_project.modules.candidate.entities.Candidate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

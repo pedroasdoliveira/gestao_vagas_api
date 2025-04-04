@@ -1,13 +1,12 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.useCases;
+package br.com.pedrooliveira.rocket_project.modules.candidate.useCases;
 
-import br.com.pedrooliveira.rocket_project.modules.candidates.dto.ProfileCandidateResponseDTO;
-import br.com.pedrooliveira.rocket_project.modules.candidates.entities.Candidate;
-import br.com.pedrooliveira.rocket_project.modules.candidates.repositories.CandidateRepository;
+import br.com.pedrooliveira.rocket_project.modules.candidate.dto.ProfileCandidateResponseDTO;
+import br.com.pedrooliveira.rocket_project.modules.candidate.entities.Candidate;
+import br.com.pedrooliveira.rocket_project.modules.candidate.repositories.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

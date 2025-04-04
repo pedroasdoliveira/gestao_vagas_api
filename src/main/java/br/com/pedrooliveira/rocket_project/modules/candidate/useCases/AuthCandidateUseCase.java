@@ -1,9 +1,9 @@
-package br.com.pedrooliveira.rocket_project.modules.candidates.useCases;
+package br.com.pedrooliveira.rocket_project.modules.candidate.useCases;
 
-import br.com.pedrooliveira.rocket_project.modules.candidates.dto.AuthCandidateRequestDTO;
-import br.com.pedrooliveira.rocket_project.modules.candidates.dto.AuthCandidateResponseDTO;
-import br.com.pedrooliveira.rocket_project.modules.candidates.entities.Candidate;
-import br.com.pedrooliveira.rocket_project.modules.candidates.repositories.CandidateRepository;
+import br.com.pedrooliveira.rocket_project.modules.candidate.dto.AuthCandidateRequestDTO;
+import br.com.pedrooliveira.rocket_project.modules.candidate.dto.AuthCandidateResponseDTO;
+import br.com.pedrooliveira.rocket_project.modules.candidate.entities.Candidate;
+import br.com.pedrooliveira.rocket_project.modules.candidate.repositories.CandidateRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Optional;
 
 @Service
 public class AuthCandidateUseCase {
