@@ -1,10 +1,10 @@
 package br.com.pedrooliveira.rocket_project.modules.candidate.useCases;
 
+import br.com.pedrooliveira.rocket_project.exceptions.candidate.UserNotFoundException;
 import br.com.pedrooliveira.rocket_project.modules.candidate.dto.ProfileCandidateResponseDTO;
 import br.com.pedrooliveira.rocket_project.modules.candidate.entities.Candidate;
 import br.com.pedrooliveira.rocket_project.modules.candidate.repositories.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -19,7 +19,7 @@ public class ProfileCandidateUseCase {
         Candidate candidate = this.candidateRepository
                 .findById(candidateId)
                 .orElseThrow(() -> {
-                    throw new UsernameNotFoundException("User not found.");
+                    throw new UserNotFoundException();
                 });
 
         return ProfileCandidateResponseDTO.builder()
