@@ -1,8 +1,12 @@
 package br.com.pedrooliveira.rocket_project.modules.candidate.controllers;
 
 import br.com.pedrooliveira.rocket_project.exceptions.candidate.UserFoundException;
+import br.com.pedrooliveira.rocket_project.exceptions.candidate.UserNotFoundException;
+import br.com.pedrooliveira.rocket_project.exceptions.company.JobNotFoundException;
 import br.com.pedrooliveira.rocket_project.modules.candidate.dto.ProfileCandidateResponseDTO;
+import br.com.pedrooliveira.rocket_project.modules.candidate.entities.ApplyJob;
 import br.com.pedrooliveira.rocket_project.modules.candidate.entities.Candidate;
+import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.ApplyJobCandidateUseCase;
 import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.CreateCandidateUseCase;
 import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.ListAllJobsByFilterUseCase;
 import br.com.pedrooliveira.rocket_project.modules.candidate.useCases.ProfileCandidateUseCase;
@@ -39,6 +43,9 @@ public class CandidateController {
 
     @Autowired
     private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
+
+    @Autowired
+    private ApplyJobCandidateUseCase applyJobCandidateUseCase;
 
     @PostMapping("/add")
     @Operation(summary = "Cadastrar candidato", description = "Função para cadastrar o candidato")
@@ -100,5 +107,26 @@ public class CandidateController {
     @SecurityRequirement(name = "jwt_auth")
     public List<Job> findJobByFilter(@RequestParam String filter) {
         return this.listAllJobsByFilterUseCase.execute(filter);
+    }
+
+    @PostMapping("/job/apply")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    @Operation(
+            summary = "Inscrição do candidato para uma vaga",
+            description = "Função responsável por realizar a inscrição do candidato em uma vaga."
+    )
+    @SecurityRequirement(name = "jwt_auth")
+    public ResponseEntity<Object> applyJob(HttpServletRequest request, @RequestBody UUID idJob) {
+        var idCandidate = request.getAttribute("candidate_id");
+
+        try {
+            ApplyJob result = this.applyJobCandidateUseCase.execute(UUID.fromString(idCandidate.toString()), idJob);
+
+            return ResponseEntity.ok().body(result);
+        } catch (UserNotFoundException | JobNotFoundException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 }

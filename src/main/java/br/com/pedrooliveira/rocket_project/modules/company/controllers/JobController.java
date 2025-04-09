@@ -1,5 +1,6 @@
 package br.com.pedrooliveira.rocket_project.modules.company.controllers;
 
+import br.com.pedrooliveira.rocket_project.exceptions.company.CompanyNotFoundException;
 import br.com.pedrooliveira.rocket_project.modules.company.dto.CreateJobDTO;
 import br.com.pedrooliveira.rocket_project.modules.company.entities.Job;
 import br.com.pedrooliveira.rocket_project.modules.company.useCases.CreateJobUseCase;
@@ -44,9 +45,9 @@ public class JobController {
     })
     @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO job, HttpServletRequest request) {
-        try {
-            Object companyId = request.getAttribute("company_id");
+        Object companyId = request.getAttribute("company_id");
 
+        try {
             var jobEntity = Job.builder()
                     .name(job.getName())
                     .description(job.getDescription())
@@ -59,6 +60,8 @@ public class JobController {
             Job result = this.createJobUseCase.execute(jobEntity);
 
             return ResponseEntity.ok().body(result);
+        } catch (CompanyNotFoundException ex) {
+            return ResponseEntity.status(400).body(ex.getMessage());
         } catch (Exception ex) {
             ex.fillInStackTrace();
             return ResponseEntity.internalServerError().body(ex.getMessage());

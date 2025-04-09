@@ -34,6 +34,7 @@ public class SecurityConfig {
                     auth
                             .requestMatchers("/swagger-ui/index.html").permitAll()
                             .requestMatchers("/candidate/", "/candidate/add").permitAll()
+                            .requestMatchers("/auth/candidate", "/auth/company").permitAll()
                             .requestMatchers("/company/", "/company/add").permitAll()
                             .requestMatchers(SWAGGER_LIST).permitAll();
                     auth.anyRequest().authenticated();
