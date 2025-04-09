@@ -26,10 +26,8 @@ public class CompanyController {
 
             return ResponseEntity.ok().body(result);
         } catch (UserFoundException | IllegalArgumentException ex) {
-            ex.printStackTrace();
             return ResponseEntity.status(400).body(ex.getMessage());
         } catch (Exception ex) {
-            ex.printStackTrace();
             return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
